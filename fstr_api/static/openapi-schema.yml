@@ -1,0 +1,21 @@
+openapi: 3.0.2
+info:
+  title: 'FSTR OpenAPI Specification'
+  version: '0.0.1'
+servers:
+  - url: http://127.0.0.1:8000
+tags:
+  - name: users
+    description: registered users
+  - name: coordinates
+    description: coordinates of pereval
+  - name: pereval
+    description: pereval main info
+  - name: areas
+    description: pereval main info
+  - name: pereval
+    description: pereval main info
+  - name: pereval
+    description: pereval main info
+  - name: pereval
+    description: pereval main info

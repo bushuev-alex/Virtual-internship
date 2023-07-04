@@ -1,5 +1,5 @@
 """
-URL configuration for fstr_api project.
+        URL configuration for fstr_api project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -17,9 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from api import views
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UsersViewset)
+router.register(r'coords', views.CoordsViewset)
+router.register(r'perevaladded', views.PerevalAddedViewest)
+router.register(r'images', views.ImagesViewest)
+router.register(r'perevalimages', views.PerevalImagesViewest)
+router.register(r'spractivitiestypes', views.SprActivitiesTypesViewest)
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # path("api/", include("api.urls")),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
