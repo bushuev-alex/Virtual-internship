@@ -12,10 +12,11 @@ tags:
   - name: pereval
     description: pereval main info
   - name: areas
-    description: pereval main info
-  - name: pereval
-    description: pereval main info
-  - name: pereval
-    description: pereval main info
-  - name: pereval
-    description: pereval main info
+    description: areas info
+  - name: images
+    description: images of pereval
+  - name: pereval_images
+    description: bound images with pereval by id
+  - name: spr_activities_types
+    description: types of movement
+
