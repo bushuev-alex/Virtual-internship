@@ -3,10 +3,10 @@ info:
   title: 'FSTR OpenAPI Specification'
   version: '0.0.1'
 servers:
-  - url: http://127.0.0.1:8000
+  - url: http://127.0.0.1:8000/
 tags:
   - name: users
-    description: registered users
+    description: all users
   - name: coordinates
     description: coordinates of pereval
   - name: pereval
@@ -19,4 +19,129 @@ tags:
     description: bound images with pereval by id
   - name: spr_activities_types
     description: types of movement
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      operationId: listUsers
+      description: List all registered users
+      responses:
+        '200':
+          description: Success answer with list of Users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Method to create User
+      tags:
+        - users
+      operationId: createUser
+      description: Create user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        '201':
+          description: New User has been successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /coords:
+    get:
+      tags:
+        - coordinates
+      operationId: listCoordinates
+      description: List coordinates for all perevals
+      responses:
+        '201':
+          description: Success answer with coordinates to pereval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coords'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - coordinates
+      operationId: addCoordinates
+      description: Add coordinates to pereval
+      responses:
+        '200':
+          description: Coordinates were successfully added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coords'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          example: Alex@example.com
+        name:
+          type: string
+          example: Alex
+    Users:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+    Coord:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: float
+          example: 45.3842
+        longitude:
+          type: number
+          format: float
+          example: 7.1525
+        height:
+          type: integer
+          example: 1200
+    Coords:
+      type: array
+      items:
+        $ref: "#/components/schemas/Coord"
+    Error:
+      type: object
+      required:
+        - code
+        - name
+      properties:
+        code:
+          type: integer
+        message:
+          type: string

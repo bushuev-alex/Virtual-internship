@@ -21,16 +21,18 @@ from rest_framework import routers
 from api import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UsersViewset)
+# router.register(r'users', views.UsersApiView.as_view())
 router.register(r'coords', views.CoordsViewset)
-router.register(r'perevaladded', views.PerevalAddedViewest)
-router.register(r'images', views.ImagesViewest)
-router.register(r'perevalimages', views.PerevalImagesViewest)
-router.register(r'spractivitiestypes', views.SprActivitiesTypesViewest)
+router.register(r'perevaladded', views.PerevalAddedViewset)
+router.register(r'images', views.ImagesViewset)
+router.register(r'perevalimages', views.PerevalImagesViewset)
+router.register(r'spractivitiestypes', views.SprActivitiesTypesViewset)
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path(r'', include(router.urls)),
+    path(r'users', views.UsersApiView.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('swagger-ui/', TemplateView.as_view(template_name='swagger-ui.html',
                                              extra_context={'schema_url': 'openapi-schema.yml'}), name='swagger-ui'),
