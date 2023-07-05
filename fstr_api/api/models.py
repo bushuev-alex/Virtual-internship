@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class Users(models.Model):
     email = models.EmailField(unique=True)
+    phone = models.TextField(default="")
     name = models.TextField()
 
 

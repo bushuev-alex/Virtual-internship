@@ -110,15 +110,72 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
+  /perevaladded:
+    get:
+      summary: Method to get main info about of pereval
+      tags:
+        - pereval
+      operationId: listPerevals
+      description: List of all perevals
+      responses:
+        '200':
+          description: Success answer with perevals
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Perevals'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Method to add main info about of pereval
+      tags:
+        - pereval
+      operationId: addPereval
+      description: Add pereval main info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pereval"
+      responses:
+        '201':
+          description: New pereval has been added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pereval'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - name
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
     User:
       type: object
       properties:
         email:
           type: string
           example: Alex@example.com
+        phone:
+          type: sting
+          example: '+79131234567'
         name:
           type: string
           example: Alex
@@ -144,13 +201,51 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Coord"
-    Error:
+    Pereval:
       type: object
-      required:
-        - code
-        - name
       properties:
-        code:
+        user_id:
           type: integer
-        message:
+          example: 1
+        beautyTitle:
           type: string
+          example: 'пер. '
+        title:
+          type: string
+          example: 'Пхия'
+        other_titles:
+          type: string
+          example: 'Триев'
+        level:
+          type: string
+          enum:
+            - winter
+            - spring
+            - summer
+            - autumn
+          default: summer
+        connect:
+          type: string
+          example: "nothing"
+          default: "nothing"
+        date_added:
+          type: string
+          example: "2021-09-22 13:18:13"
+        add_first_time:
+          type: string
+          example: "2020-09-22 13:18:13"
+        coord_id:
+          type: integer
+          example: 2
+        status:
+          type: string
+          enum:
+            - new
+            - pending
+            - accepted
+            - rejected
+          default: new
+    Perevals:
+      type: array
+      items:
+        $ref: "#/components/schemas/Pereval"
