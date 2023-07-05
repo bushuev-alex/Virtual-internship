@@ -25,9 +25,23 @@ class UsersApiView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CoordsViewset(viewsets.ModelViewSet):
-    queryset = Coords.objects.all()
-    serializer_class = CoordsSerializer
+class CoordsApiView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        coords = Coords.objects.all()
+        serializer = CoordsSerializer(coords, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        print(request.__dict__)
+        data = {'latitude': request.data.get('latitude'),
+                'longitude': request.data.get('longitude'),
+                'height': request.data.get('height')}
+        serializer = CoordsSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PerevalAddedViewset(viewsets.ModelViewSet):

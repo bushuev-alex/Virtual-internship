@@ -22,7 +22,7 @@ from api import views
 
 router = routers.DefaultRouter()
 # router.register(r'users', views.UsersApiView.as_view())
-router.register(r'coords', views.CoordsViewset)
+# router.register(r'coords', views.CoordsViewset)
 router.register(r'perevaladded', views.PerevalAddedViewset)
 router.register(r'images', views.ImagesViewset)
 router.register(r'perevalimages', views.PerevalImagesViewset)
@@ -33,6 +33,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path(r'', include(router.urls)),
     path(r'users', views.UsersApiView.as_view()),
+    path(r'coords', views.CoordsApiView.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('swagger-ui/', TemplateView.as_view(template_name='swagger-ui.html',
                                              extra_context={'schema_url': 'openapi-schema.yml'}), name='swagger-ui'),
