@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from api import views
-
+from django.shortcuts import redirect
 # router = routers.DefaultRouter()
 # router.register(r'users', views.UsersApiView.as_view())
 # router.register(r'coords', views.CoordsViewset)
@@ -33,6 +33,7 @@ from api import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     # path(r'', include(router.urls)),
+    path(r'', views.redirect_swagger),
     path(r'users', views.UsersApiView.as_view()),
     path(r'coords', views.CoordsApiView.as_view()),
     path(r'perevaladded', views.PerevalAddedApiView.as_view()),

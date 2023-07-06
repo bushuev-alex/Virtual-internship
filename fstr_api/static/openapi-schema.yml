@@ -58,7 +58,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '500':
+          description: Ошибка при выполнении операции
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
         'default':
           description: All other events
           content:
@@ -103,7 +115,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Coord'
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '500':
+          description: Ошибка при выполнении операции
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
         'default':
           description: All other events
           content:
@@ -148,7 +172,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pereval'
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '500':
+          description: Ошибка при выполнении операции
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
         'default':
           description: All other events
           content:
@@ -193,7 +229,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Area'
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '500':
+          description: Ошибка при выполнении операции
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
         'default':
           description: All other events
           content:
@@ -238,7 +286,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Image'
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '500':
+          description: Ошибка при выполнении операции
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
         'default':
           description: All other events
           content:
@@ -283,7 +343,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PerevalImage'
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '500':
+          description: Ошибка при выполнении операции
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
         'default':
           description: All other events
           content:
@@ -328,7 +400,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SprActivitiesType'
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '500':
+          description: Ошибка при выполнении операции
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
         'default':
           description: All other events
           content:
@@ -492,3 +576,12 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/SprActivitiesType"
+    Response:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+        id:
+          type: integer
