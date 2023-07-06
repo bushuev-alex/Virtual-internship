@@ -155,7 +155,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     post:
-      summary: Method to add main info about of pereval
+      summary: Method to add main info about pereval
       tags:
         - pereval
       operationId: addPereval
@@ -269,7 +269,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     post:
-      summary: Method to add pereval image
+      summary: Method to add links to pereval images
       tags:
         - images
       operationId: addImage
