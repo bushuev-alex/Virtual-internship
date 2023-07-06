@@ -47,7 +47,7 @@ class PerevalAreas(models.Model):
 class Images(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     title = models.TextField(default="")
-    img = models.BinaryField()
+    img = models.TextField()
 
 
 class PerevalImages(models.Model):

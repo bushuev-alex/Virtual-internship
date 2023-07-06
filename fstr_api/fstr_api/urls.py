@@ -20,21 +20,26 @@ from django.urls import path, include
 from rest_framework import routers
 from api import views
 
-router = routers.DefaultRouter()
+# router = routers.DefaultRouter()
 # router.register(r'users', views.UsersApiView.as_view())
 # router.register(r'coords', views.CoordsViewset)
 # router.register(r'perevaladded', views.PerevalAddedViewset)
-router.register(r'images', views.ImagesViewset)
-router.register(r'perevalimages', views.PerevalImagesViewset)
-router.register(r'spractivitiestypes', views.SprActivitiesTypesViewset)
+# router.register(r'images', views.ImagesViewset)
+# router.register(r'areas', views.AreasViewset)
+# router.register(r'perevalimages', views.PerevalImagesViewset)
+# router.register(r'spractivitiestypes', views.SprActivitiesTypesViewset)
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path(r'', include(router.urls)),
+    # path(r'', include(router.urls)),
     path(r'users', views.UsersApiView.as_view()),
     path(r'coords', views.CoordsApiView.as_view()),
     path(r'perevaladded', views.PerevalAddedApiView.as_view()),
+    path(r'areas', views.AreasApiView.as_view()),
+    path(r'images', views.ImagesApiView.as_view()),
+    path(r'perevalimages', views.PerevalImagesApiView.as_view()),
+    path(r'sprtypes', views.SprActivitiesTypesApiView.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('swagger-ui/', TemplateView.as_view(template_name='swagger-ui.html',
                                              extra_context={'schema_url': 'openapi-schema.yml'}), name='swagger-ui'),

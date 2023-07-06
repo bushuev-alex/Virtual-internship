@@ -69,16 +69,84 @@ class PerevalAddedApiView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ImagesViewset(viewsets.ModelViewSet):
-    queryset = Images.objects.all()
-    serializer_class = ImagesSerializer
+class AreasApiView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        areas = PerevalAreas.objects.all()
+        serializer = AreasSerializer(areas, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        data = {'id_parent': request.data.get('id_parent'),
+                'title': request.data.get('title')}
+        serializer = AreasSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class PerevalImagesViewset(viewsets.ModelViewSet):
-    queryset = PerevalImages.objects.all()
-    serializer_class = PerevalImagesSerializer
+#
+#
+# class AreasViewset(viewsets.ViewSet):
+#     queryset = PerevalAreas.objects.all()
+#     serializer_class = AreasSerializer
+#
+#     def list(self, request):
+#         queryset = PerevalAreas.objects.all()
+#         serializer = AreasSerializer(queryset, many=True)
+#         return Response(serializer.data)
+#
+#     def create(self):
+#         pass
 
 
-class SprActivitiesTypesViewset(viewsets.ModelViewSet):
-    queryset = SprActivitiesTypes.objects.all()
-    serializer_class = SprActivitiesTypesSerializer
+class ImagesApiView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        imgs = Images.objects.all()
+        serializer = ImagesSerializer(imgs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        data = {'date_added': request.data.get('date_added'),
+                'title': request.data.get('title'),
+                'img': request.data.get('img')}
+        serializer = ImagesSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PerevalImagesApiView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        pereval_images = PerevalImages.objects.all()
+        serializer = PerevalImagesSerializer(pereval_images, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        data = {'pereval_id': request.data.get('pereval_id'),
+                'image_id': request.data.get('image_id')}
+        serializer = PerevalImagesSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SprActivitiesTypesApiView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        sprs = SprActivitiesTypes.objects.all()
+        serializer = SprActivitiesTypesSerializer(sprs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        data = {'title': request.data.get('title')}
+        serializer = SprActivitiesTypesSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

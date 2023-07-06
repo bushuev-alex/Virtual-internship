@@ -21,6 +21,12 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
                   'coord_id', 'status']
 
 
+class AreasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PerevalAreas
+        fields = ['id_parent', 'title', ]
+
+
 class ImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Images

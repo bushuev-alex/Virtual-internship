@@ -155,6 +155,186 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /areas:
+    get:
+      summary: Method to get areas
+      tags:
+        - areas
+      operationId: listAreas
+      description: List of all pereval areas
+      responses:
+        '200':
+          description: Success answer with areas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Areas'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Method to add pereval areas
+      tags:
+        - areas
+      operationId: addAreas
+      description: Add pereval areas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Area"
+      responses:
+        '201':
+          description: New pereval has been added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Area'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /images:
+    get:
+      summary: Method to get links with pereval images
+      tags:
+        - images
+      operationId: listImages
+      description: List of all pereval images
+      responses:
+        '200':
+          description: Success answer with images
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Images'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Method to add pereval image
+      tags:
+        - images
+      operationId: addImage
+      description: Add pereval image
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Image"
+      responses:
+        '201':
+          description: New image has been added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /perevalimages:
+    get:
+      summary: Method to get pereval IDs with its images IDs
+      tags:
+        - pereval_images
+      operationId: listPerevalImagesIDs
+      description: List of all images ids to pereval ids
+      responses:
+        '200':
+          description: Success answer with pereval IDs and its images IDs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerevalImages'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Method to add pereval IDs with its images IDs
+      tags:
+        - pereval_images
+      operationId: addPerevalImagesIDs
+      description: Add pereval IDs with its images IDs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerevalImage"
+      responses:
+        '201':
+          description: Pereval IDs and images IDs have been added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerevalImage'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /sprtypes:
+    get:
+      summary: Method to get spr activities types
+      tags:
+        - spr_activities_types
+      operationId: listActivitiesTypes
+      description: List spr activities types
+      responses:
+        '200':
+          description: Success answer with activities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SprActivitiesTypes'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Method to add spr activities type
+      tags:
+        - spr_activities_types
+      operationId: addActivitiesType
+      description: Add spr activity type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SprActivitiesType"
+      responses:
+        '201':
+          description: New activity has been added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SprActivitiesType'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     Error:
@@ -174,7 +354,7 @@ components:
           type: string
           example: Alex@example.com
         phone:
-          type: sting
+          type: string
           example: '+79131234567'
         name:
           type: string
@@ -249,3 +429,66 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Pereval"
+    Area:
+      type: object
+      properties:
+        id_parent:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Хребет Монгольский Алтай
+    Areas:
+      type: array
+      items:
+        $ref: "#/components/schemas/Area"
+    Image:
+      type: object
+      properties:
+        date_added:
+          type: string
+          example: '2022-02-21 14:21:51.796151'
+        title:
+          type: string
+          example: Седловина
+        img:
+          type: string
+          example: "/home/user/ico.jpeg"
+    Images:
+      type: array
+      items:
+        $ref: "#/components/schemas/Image"
+    PerevalImage:
+      type: object
+      properties:
+        pereval_id:
+          type: integer
+          example: 1
+        image_id:
+          type: integer
+          example: 2
+    PerevalImages:
+      type: array
+      items:
+        $ref: "#/components/schemas/PerevalImage"
+    SprActivitiesType:
+      type: object
+      properties:
+        title:
+          type: string
+          enum:
+            - пешком
+            - лыжи
+            - катамаран
+            - байдарка
+            - плот
+            - сплав
+            - велосипед
+            - автомобиль
+            - мотоцикл
+            - парус
+            - верхом
+    SprActivitiesTypes:
+      type: array
+      items:
+        $ref: "#/components/schemas/SprActivitiesType"
