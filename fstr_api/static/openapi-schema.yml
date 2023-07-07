@@ -16,7 +16,7 @@ tags:
   - name: images
     description: images of pereval
   - name: pereval_images
-    description: bound images with pereval by id
+    description: images bound with pereval by id
   - name: spr_activities_types
     description: types of movement
 paths:
