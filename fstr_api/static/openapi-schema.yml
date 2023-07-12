@@ -136,14 +136,14 @@ paths:
                 $ref: '#/components/schemas/Error'
   /perevaladded:
     get:
-      summary: Method to get main info about of pereval
+      summary: Method to get main info about all perevals
       tags:
         - pereval
       operationId: listPerevals
       description: List of all perevals
       responses:
         '200':
-          description: Success answer with perevals
+          description: Success answer with all perevals
           content:
             application/json:
               schema:
@@ -155,7 +155,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     post:
-      summary: Method to add main info about pereval
+      summary: Method to add main info about one pereval
       tags:
         - pereval
       operationId: addPereval
@@ -185,6 +185,107 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /perevaladded/{id}:
+    get:
+      summary: Method to get main info about pereval by its ID
+      tags:
+        - pereval
+      operationId: getPerevalByID
+      description: Get pereval by its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: pereval identifier
+          schema:
+            type: integer
+          example: 1
+      responses:
+        '200':
+          description: Success answer with perevals
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pereval'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Method to partial patch info about pereval with certain ID
+      tags:
+        - pereval
+      operationId: patchPereval
+      description: Partial patch of pereval main info
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: pereval identifier
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PerevalPatch"
+      responses:
+        '201':
+          description: Perevel was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '500':
+          description: Ошибка при выполнении операции
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        'default':
+          description: All other events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /perevaladded/{email}:
+    get:
+      summary: Method to get perevals added by user with certain email
+      tags:
+        - pereval
+      operationId: getPerevalByUserEmail
+      description: Get pereval added by user with certain email
+      parameters:
+        - name: email
+          in: path
+          required: true
+          description: user email
+          schema:
+            type: string
+          example: vova@gmail.com
+      responses:
+        '200':
+          description: Success answer with perevals added by user with certain email
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Perevals'
         'default':
           description: All other events
           content:
@@ -498,6 +599,41 @@ components:
         add_first_time:
           type: string
           example: "2020-09-22 13:18:13"
+        coord_id:
+          type: integer
+          example: 2
+        status:
+          type: string
+          enum:
+            - new
+            - pending
+            - accepted
+            - rejected
+          default: new
+    PerevalPatch:
+      type: object
+      properties:
+        beautyTitle:
+          type: string
+          example: 'пер. '
+        title:
+          type: string
+          example: 'Пхия'
+        other_titles:
+          type: string
+          example: 'Триев'
+        level:
+          type: string
+          enum:
+            - winter
+            - spring
+            - summer
+            - autumn
+          default: summer
+        connect:
+          type: string
+          example: "nothing"
+          default: "nothing"
         coord_id:
           type: integer
           example: 2

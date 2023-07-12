@@ -46,9 +46,18 @@ class CoordsApiView(APIView):
 
 class PerevalAddedApiView(APIView):
 
-    def get(self, request, *args, **kwargs):
-        pereval_added = PerevalAdded.objects.all()
-        serializer = PerevalAddedSerializer(pereval_added, many=True)
+    def get(self, request, **kwargs):
+        pk = self.kwargs.get('pk')
+        email = self.kwargs.get('email')
+        if pk:
+            pereval_added = PerevalAdded.objects.get(pk=pk)
+            serializer = PerevalAddedSerializer(pereval_added)
+        elif email:
+            pereval_added = PerevalAdded.objects.filter(user_id__email=f'{email}')
+            serializer = PerevalAddedSerializer(pereval_added, many=True)
+        else:
+            pereval_added = PerevalAdded.objects.all()
+            serializer = PerevalAddedSerializer(pereval_added, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
@@ -68,6 +77,16 @@ class PerevalAddedApiView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def patch(self, request, pk):
+        pereval_obj = PerevalAdded.objects.get(pk=pk)
+        if pereval_obj.status == 'new':
+            serializer = PerevalAddedPatchSerializer(pereval_obj, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_206_PARTIAL_CONTENT)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data=0, status=status.HTTP_403_FORBIDDEN)
+
 
 class AreasApiView(APIView):
 
@@ -86,8 +105,6 @@ class AreasApiView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#
-#
 # class AreasViewset(viewsets.ViewSet):
 #     queryset = PerevalAreas.objects.all()
 #     serializer_class = AreasSerializer

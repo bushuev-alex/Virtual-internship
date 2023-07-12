@@ -21,6 +21,12 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
                   'coord_id', 'status']
 
 
+class PerevalAddedPatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PerevalAdded
+        fields = ['beautyTitle', 'title', 'other_titles', 'level', 'connect', 'coord_id', 'status']
+
+
 class AreasSerializer(serializers.ModelSerializer):
     class Meta:
         model = PerevalAreas
