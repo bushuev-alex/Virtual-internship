@@ -17,6 +17,10 @@ API имеет следующие пути получения / отправки
 * /perevaladded (Методы GET/POST)
 * /perevaladded/{id} (Методы GET/PATCH) 
 * /perevaladded/{email} (Метод GET)
+* /images (Методы GET/POST) 
+* /areas (Методы GET/POST) 
+* /perevalimages (Методы GET/POST) 
+* /sprtypes (Методы GET/POST) 
 
 # Пути
 ## **/users** 
