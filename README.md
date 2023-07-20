@@ -249,3 +249,5 @@ winter, summer, autumn, spring\
       "coord_id": 2,\
       "status": "new"\
   }]
+
+# При
