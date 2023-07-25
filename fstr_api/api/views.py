@@ -56,7 +56,7 @@ class PerevalAddedApiView(APIView):
             pereval_added = PerevalAdded.objects.filter(user_id__email=f'{email}')
             serializer = PerevalAddedSerializer(pereval_added, many=True)
         elif email and not Users.objects.filter(email=email).exists():
-            return Response("User with this email doesn't exist", status=status.HTTP_400_BAD_REQUEST)
+            return Response(f"User with email {email} doesn't exist", status=status.HTTP_400_BAD_REQUEST)
         else:
             pereval_added = PerevalAdded.objects.all()
             serializer = PerevalAddedSerializer(pereval_added, many=True)
